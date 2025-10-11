@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Slideshow</title>
+  <style>
+    :root { --backdrop: {backdropColor}; }
+    html, body {
+      height: 100%; margin: 0; padding: 0; background: var(--backdrop); color: #eee;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    .stage {
+      display: grid; place-items: center; height: 100%; width: 100%;
+    }
+    .stage img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 8px; }
+    .hidden { display: none; }
+    .dots { position: fixed; bottom: 16px; left: 0; right: 0; text-align: center; }
+    .dot { display: inline-block; width: 8px; height: 8px; margin: 0 4px; border-radius: 50%; background: #777; opacity: .6; }
+    .dot.active { background: #fff; opacity: 1; }
+    .meta { position: fixed; top: 8px; right: 12px; font-size: 12px; opacity: .8; }
+  </style>
+</head>
+<body data-refresh-ms="{refreshMs}">
+  <div class="stage">
+    {#if images}
+      <img id="slide" alt="slideshow image" src="{images[0]}" />
+    {#else}
+      <img id="slide" alt="slideshow image" src="" class="hidden" />
+    {/if}
+  </div>
+
+  <div class="dots">
+    {#for img in images}
+      <span class="dot{#if img_index == 0} active{/if}"></span>
+    {/for}
+  </div>
+
+  <div class="meta">{images.size} images • {refreshMs} ms</div>
+
+  <div id="img-data" class="hidden">
+    {#for img in images}<span class="img-src">{img}</span>{/for}
+  </div>
+
+  <script>
+    (function() {
+      const images = Array.from(document.querySelectorAll('#img-data .img-src')).map(el => el.textContent);
+      const refreshMs = parseInt(document.body.dataset.refreshMs || '3000', 10);
+      const slide = document.getElementById('slide');
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      let i = 0;
+
+      function show(idx) {
+        if (!images || images.length === 0) return;
+        i = (idx + images.length) % images.length;
+        slide.src = images[i];
+        dots.forEach((d, n) => d.classList.toggle('active', n === i));
+      }
+
+      if (images && images.length > 1) {
+        setInterval(() => show(i + 1), Math.max(250, refreshMs|0));
+      }
+    })();
+  </script>
+</body>
+</html>

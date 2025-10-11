@@ -1,11 +1,2 @@
-pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-        mavenLocal()
-    }
-    plugins {
-        id "${quarkusPluginId}" version "${quarkusPluginVersion}"
-    }
-}
-rootProject.name = 'demo'
+// This project has been migrated to Maven.
+// Gradle settings are intentionally disabled. Use Maven (pom.xml) instead.

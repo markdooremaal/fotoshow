@@ -51,10 +51,11 @@ public class SlideshowResource {
             images = List.of(TRANSPARENT_PX_DATA_URI);
         }
 
-        return slideshow
-                .data("images", images)
+        TemplateInstance inst = slideshow.instance();
+        inst = inst.data("images", images)
                 .data("backdropColor", backdropColor)
                 .data("refreshMs", refreshMs);
+        return inst;
     }
 
     private static List<String> loadImagesWithFallback(String externalDir, int count) {
