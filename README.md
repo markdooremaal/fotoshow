@@ -53,6 +53,16 @@ You can then execute your native executable with: `./target/demo-1.0-SNAPSHOT-ru
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
 
+## Health endpoints
+
+SmallRye Health is enabled. Endpoints:
+
+- Liveness: http://localhost:18181/q/health/live
+- Readiness: http://localhost:18181/q/health/ready
+- Combined: http://localhost:18181/q/health
+
+Readiness checks that at least one slideshow image is available from the configured external directory (SLIDESHOW_EXTERNAL_DIR) or bundled classpath resources.
+
 ## Related Guides
 
 - REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and
