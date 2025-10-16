@@ -12,10 +12,10 @@ ENV LANGUAGE="en_US:en"
 WORKDIR /work/
 
 # Copy the quarkus fast-jar layout produced by Gradle into the image
-COPY build/quarkus-app/lib/ /work/lib/
-COPY build/quarkus-app/*.jar /work/
-COPY build/quarkus-app/app/ /work/app/
-COPY build/quarkus-app/quarkus/ /work/quarkus/
+COPY target/quarkus-app/lib/ /work/lib/
+COPY target/quarkus-app/*.jar /work/
+COPY target/quarkus-app/app/ /work/app/
+COPY target/quarkus-app/quarkus/ /work/quarkus/
 
 # Quarkus app port
 EXPOSE 18181
