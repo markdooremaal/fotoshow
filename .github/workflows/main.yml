@@ -24,7 +24,6 @@ jobs:
         with:
           repository: markdooremaal/fotoshow
           path: fotoshow
-          token: ${{ secrets.CHECKOUT_PAT }}
           fetch-depth: 1
 
       - name: Set up Java
@@ -64,7 +63,6 @@ jobs:
         with:
           repository: markdooremaal/fotoshow
           path: fotoshow
-          token: ${{ secrets.CHECKOUT_PAT }}
           fetch-depth: 1
 
       - name: Move build output into source
